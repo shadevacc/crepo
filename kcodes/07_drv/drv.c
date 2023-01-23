@@ -22,10 +22,11 @@ static struct class *cls_sha;
 
 static int __init dinit(void)
 {
+    int ret;
     pr_info("%s: dinit\n", KBUILD_MODNAME);
 
-    dev = alloc_chrdev_region(&dev, FIRST_MINOR, REQ_DEV_CNT, DEV);
-    if (dev < 0) {
+    ret = alloc_chrdev_region(&dev, FIRST_MINOR, REQ_DEV_CNT, DEV);
+    if (ret < 0) {
         pr_err("Unable to allocate major no\n");
         return -ENOMEM;
     }
