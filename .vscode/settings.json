@@ -1,3 +1,24 @@
 {
-    "C_Cpp.errorSquiggles": "enabled"
+    "C_Cpp.errorSquiggles": "enabled",
+    "workbench.colorTheme": "Community Material Theme Palenight High Contrast",
+    "window.zoomLevel": 1,
+    "remote.SSH.connectTimeout": 35,
+    "tabnine.experimentalAutoImports": true,
+    "workbench.iconTheme": "Monokai Pro Icons",
+    "editor.fontFamily": "FantasqueSansMono Nerd Font Mono",
+    "editor.fontSize": 18,
+    "material-icon-theme.folders.theme": "specific",
+    "terminal.integrated.fontSize": 17,
+    "workbench.tree.indent": 32,
+    "files.exclude": {
+        "**/.__EMBETRONICX__PROJECT__.code-workspace": true,
+        "**/.kcodes.code-workspace": true
+    },
+    "editor.rulers": [
+        70, 80, 120
+    ],
+    "editor.cursorStyle": "line",
+    "editor.cursorWidth": 2,
+    "editor.lineHeight": 20,
+    "workbench.editor.enablePreview": false,
 }
