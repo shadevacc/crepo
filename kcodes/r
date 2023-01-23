@@ -1,0 +1,18 @@
+#!/usr/bin/bash
+
+# Check if one command line argument is provided to the script
+if [ $# -ne 1 ]; then
+  echo "-----"
+fi
+
+# Take the argument to a temporary variable named modname
+modname=$1
+cd ${PWD}
+echo "-----" > /dev/kmsg
+sudo insmod ${modname}.ko
+echo "-----" > /dev/kmsg
+
+# Now remove the module and exit the script
+sudo rmmod ${modname}
+echo "=====" > /dev/kmsg
+dmesg -c

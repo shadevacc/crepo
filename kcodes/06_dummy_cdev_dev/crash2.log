@@ -1,0 +1,54 @@
+[ 7273.797655] dummycdev_dev: dinit
+[ 7273.797663] Major no allocated successfully
+[ 7273.797664] Major & Minor for use: 0 0
+[ 7273.797669] ------------[ cut here ]------------
+[ 7273.797670] WARNING: CPU: 0 PID: 11887 at fs/char_dev.c:486 cdev_add+0x6a/0x90
+[ 7273.797677] Modules linked in: dummycdev_dev(OE+) oops(OE+) isofs intel_rapl_msr intel_rapl_common vsock_loopback vmw_vsock_virtio_transport_common crct10dif_pclmul vmw_vsock_vmci_transport binfmt_misc vsock snd_ens1371 ghash_clmulni_intel snd_ac97_codec gameport ac97_bus snd_pcm vmw_balloon aesni_intel crypto_simd cryptd rapl snd_seq_midi snd_seq_midi_event snd_rawmidi nls_iso8859_1 snd_seq snd_seq_device input_leds joydev snd_timer serio_raw snd soundcore vmw_vmci mac_hid sch_fq_codel vmwgfx ttm drm_kms_helper cec rc_core fb_sys_fops syscopyarea sysfillrect sysimgblt ipmi_devintf ipmi_msghandler msr parport_pc ppdev lp parport mtd ramoops reed_solomon pstore_blk drm pstore_zone efi_pstore ip_tables x_tables autofs4 hid_generic crc32_pclmul psmouse usbhid hid mptspi mptscsih ahci mptbase libahci e1000 scsi_transport_spi i2c_piix4 pata_acpi floppy [last unloaded: dummycdev_dev]
+[ 7273.797712] CPU: 0 PID: 11887 Comm: insmod Tainted: G      D W  OE     5.15.0-58-generic #64-Ubuntu
+[ 7273.797715] Hardware name: VMware, Inc. VMware Virtual Platform/440BX Desktop Reference Platform, BIOS 6.00 11/12/2020
+[ 7273.797716] RIP: 0010:cdev_add+0x6a/0x90
+[ 7273.797719] Code: 10 48 8d 65 f0 44 89 e0 5b 41 5c 5d c3 cc cc cc cc 48 8b 7b 18 e8 66 c5 2f 00 48 8d 65 f0 44 89 e0 5b 41 5c 5d c3 cc cc cc cc <0f> 0b 41 bc f0 ff ff ff 48 8d 65 f0 44 89 e0 5b 41 5c 5d c3 cc cc
+[ 7273.797721] RSP: 0018:ffffb2b585b47c60 EFLAGS: 00010246
+[ 7273.797723] RAX: 0000000000000001 RBX: 0000000000000000 RCX: 0000000000000000
+[ 7273.797724] RDX: 0000000000000001 RSI: 0000000000000000 RDI: ffffffffc09e04e0
+[ 7273.797725] RBP: ffffb2b585b47c70 R08: 0000000000000003 R09: 20726f6620726f6e
+[ 7273.797726] R10: 6f6620726f6e694d R11: 202620726f6a614d R12: ffffffffc09e3000
+[ 7273.797727] R13: ffff8a1124b1f670 R14: 0000000000000000 R15: ffffffffc09e0140
+[ 7273.797728] FS:  00007f4815372000(0000) GS:ffff8a1239e00000(0000) knlGS:0000000000000000
+[ 7273.797729] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[ 7273.797731] CR2: 0000080217083558 CR3: 0000000011a5c006 CR4: 0000000000770ef0
+[ 7273.797739] PKRU: 55555554
+[ 7273.797740] Call Trace:
+[ 7273.797757]  <TASK>
+[ 7273.797760]  ? 0xffffffffc09e3000
+[ 7273.797763]  dinit+0x8f/0x1000 [dummycdev_dev]
+[ 7273.797766]  do_one_initcall+0x46/0x1e0
+[ 7273.797769]  ? kmem_cache_alloc_trace+0x19e/0x2e0
+[ 7273.797773]  do_init_module+0x52/0x260
+[ 7273.797775]  load_module+0xb2b/0xbc0
+[ 7273.797777]  __do_sys_finit_module+0xbf/0x120
+[ 7273.797779]  __x64_sys_finit_module+0x18/0x20
+[ 7273.797780]  do_syscall_64+0x59/0xc0
+[ 7273.797783]  ? exit_to_user_mode_prepare+0x37/0xb0
+[ 7273.797786]  ? syscall_exit_to_user_mode+0x27/0x50
+[ 7273.797788]  ? __x64_sys_lseek+0x18/0x20
+[ 7273.797790]  ? do_syscall_64+0x69/0xc0
+[ 7273.797791]  ? exit_to_user_mode_prepare+0x96/0xb0
+[ 7273.797793]  ? syscall_exit_to_user_mode+0x27/0x50
+[ 7273.797795]  ? __x64_sys_read+0x19/0x20
+[ 7273.797796]  ? do_syscall_64+0x69/0xc0
+[ 7273.797798]  ? syscall_exit_to_user_mode+0x27/0x50
+[ 7273.797800]  ? __x64_sys_newfstatat+0x1c/0x30
+[ 7273.797802]  ? do_syscall_64+0x69/0xc0
+[ 7273.797803]  entry_SYSCALL_64_after_hwframe+0x61/0xcb
+[ 7273.797806] RIP: 0033:0x7f4815491a3d
+[ 7273.797808] Code: 5b 41 5c c3 66 0f 1f 84 00 00 00 00 00 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d c3 a3 0f 00 f7 d8 64 89 01 48
+[ 7273.797809] RSP: 002b:00007fff8919bbb8 EFLAGS: 00000246 ORIG_RAX: 0000000000000139
+[ 7273.797811] RAX: ffffffffffffffda RBX: 000055c0409af7a0 RCX: 00007f4815491a3d
+[ 7273.797812] RDX: 0000000000000000 RSI: 000055c03fff7cd2 RDI: 0000000000000003
+[ 7273.797813] RBP: 0000000000000000 R08: 0000000000000000 R09: 0000000000000000
+[ 7273.797814] R10: 0000000000000003 R11: 0000000000000246 R12: 000055c03fff7cd2
+[ 7273.797815] R13: 000055c0409af760 R14: 000055c03fff6888 R15: 000055c0409af8b0
+[ 7273.797848]  </TASK>
+[ 7273.797850] ---[ end trace b75b7ca164670869 ]---
+[ 7273.797851] Unable to register cdev

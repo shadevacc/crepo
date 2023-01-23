@@ -1,0 +1,1 @@
+cmd_/mnt/vmshare/kcodes/06_02_oops/Module.symvers := sed 's/\.ko$$/\.o/' /mnt/vmshare/kcodes/06_02_oops/modules.order | scripts/mod/modpost -m -a  -o /mnt/vmshare/kcodes/06_02_oops/Module.symvers -e -i Module.symvers   -T -

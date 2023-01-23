@@ -1,0 +1,68 @@
+root@ds:/mnt/vmshare/kcodes/06_02_oops# dmesg -c
+[ 6933.023169] oops_init
+[ 6933.023177] BUG: kernel NULL pointer dereference, address: 0000000000000042
+[ 6933.023180] #PF: supervisor write access in kernel mode
+[ 6933.023182] #PF: error_code(0x0002) - not-present page
+[ 6933.023196] PGD 0 P4D 0 
+[ 6933.023199] Oops: 0002 [#1] SMP NOPTI
+[ 6933.023202] CPU: 0 PID: 10975 Comm: insmod Tainted: G        W  OE     5.15.0-58-generic #64-Ubuntu
+[ 6933.023204] Hardware name: VMware, Inc. VMware Virtual Platform/440BX Desktop Reference Platform, BIOS 6.00 11/12/2020
+[ 6933.023206] RIP: 0010:do_oops+0x6/0x1a [oops]
+[ 6933.023212] Code: Unable to access opcode bytes at RIP 0xffffffffc0984fdc.
+[ 6933.023213] RSP: 0018:ffffb2b585a0fc18 EFLAGS: 00010246
+[ 6933.023214] RAX: 0000000000000009 RBX: 0000000000000000 RCX: 0000000000000000
+[ 6933.023216] RDX: 0000000000000000 RSI: ffff8a1239e20580 RDI: ffff8a1239e20580
+[ 6933.023217] RBP: ffffb2b585a0fc28 R08: 0000000000000003 R09: fffffffffff23b08
+[ 6933.023218] R10: 000000000000000d R11: 0000000000000001 R12: ffffffffc098501a
+[ 6933.023219] R13: ffff8a1124b1fa80 R14: 0000000000000000 R15: ffffffffc0987000
+[ 6933.023234] FS:  00007fec4f1fc000(0000) GS:ffff8a1239e00000(0000) knlGS:0000000000000000
+[ 6933.023235] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[ 6933.023237] CR2: ffffffffc0984fdc CR3: 000000001195e002 CR4: 0000000000770ef0
+[ 6933.023246] PKRU: 55555554
+[ 6933.023247] Call Trace:
+[ 6933.023249]  <TASK>
+[ 6933.023251]  ? so2_oops_init+0x1a/0x22 [oops]
+[ 6933.023254]  do_one_initcall+0x46/0x1e0
+[ 6933.023259]  ? kmem_cache_alloc_trace+0x19e/0x2e0
+[ 6933.023264]  do_init_module+0x52/0x260
+[ 6933.023266]  load_module+0xb2b/0xbc0
+[ 6933.023268]  __do_sys_finit_module+0xbf/0x120
+[ 6933.023270]  __x64_sys_finit_module+0x18/0x20
+[ 6933.023272]  do_syscall_64+0x59/0xc0
+[ 6933.023285]  ? syscall_exit_to_user_mode+0x27/0x50
+[ 6933.023287]  ? __x64_sys_mmap+0x33/0x50
+[ 6933.023304]  ? do_syscall_64+0x69/0xc0
+[ 6933.023306]  ? switch_fpu_return+0x4e/0xc0
+[ 6933.023308]  ? exit_to_user_mode_prepare+0x96/0xb0
+[ 6933.023311]  ? syscall_exit_to_user_mode+0x27/0x50
+[ 6933.023313]  ? __x64_sys_newfstatat+0x1c/0x30
+[ 6933.023316]  ? do_syscall_64+0x69/0xc0
+[ 6933.023318]  ? switch_fpu_return+0x4e/0xc0
+[ 6933.023320]  ? exit_to_user_mode_prepare+0x96/0xb0
+[ 6933.023321]  ? syscall_exit_to_user_mode+0x27/0x50
+[ 6933.023323]  ? do_syscall_64+0x69/0xc0
+[ 6933.023325]  entry_SYSCALL_64_after_hwframe+0x61/0xcb
+[ 6933.023328] RIP: 0033:0x7fec4f31ba3d
+[ 6933.023330] Code: 5b 41 5c c3 66 0f 1f 84 00 00 00 00 00 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d c3 a3 0f 00 f7 d8 64 89 01 48
+[ 6933.023331] RSP: 002b:00007ffe22f33ce8 EFLAGS: 00000246 ORIG_RAX: 0000000000000139
+[ 6933.023333] RAX: ffffffffffffffda RBX: 0000562e0235c760 RCX: 00007fec4f31ba3d
+[ 6933.023335] RDX: 0000000000000000 RSI: 0000562e00f49cd2 RDI: 0000000000000003
+[ 6933.023336] RBP: 0000000000000000 R08: 0000000000000000 R09: 0000000000000000
+[ 6933.023336] R10: 0000000000000003 R11: 0000000000000246 R12: 0000562e00f49cd2
+[ 6933.023338] R13: 0000562e0235c3d0 R14: 0000562e00f48888 R15: 0000562e0235c870
+[ 6933.023354]  </TASK>
+[ 6933.023355] Modules linked in: oops(OE+) isofs intel_rapl_msr intel_rapl_common vsock_loopback vmw_vsock_virtio_transport_common crct10dif_pclmul vmw_vsock_vmci_transport binfmt_misc vsock snd_ens1371 ghash_clmulni_intel snd_ac97_codec gameport ac97_bus snd_pcm vmw_balloon aesni_intel crypto_simd cryptd rapl snd_seq_midi snd_seq_midi_event snd_rawmidi nls_iso8859_1 snd_seq snd_seq_device input_leds joydev snd_timer serio_raw snd soundcore vmw_vmci mac_hid sch_fq_codel vmwgfx ttm drm_kms_helper cec rc_core fb_sys_fops syscopyarea sysfillrect sysimgblt ipmi_devintf ipmi_msghandler msr parport_pc ppdev lp parport mtd ramoops reed_solomon pstore_blk drm pstore_zone efi_pstore ip_tables x_tables autofs4 hid_generic crc32_pclmul psmouse usbhid hid mptspi mptscsih ahci mptbase libahci e1000 scsi_transport_spi i2c_piix4 pata_acpi floppy [last unloaded: dummycdev_dev]
+[ 6933.023402] CR2: 0000000000000042
+[ 6933.023417] ---[ end trace b75b7ca164670868 ]---
+[ 6933.023418] RIP: 0010:do_oops+0x6/0x1a [oops]
+[ 6933.023421] Code: Unable to access opcode bytes at RIP 0xffffffffc0984fdc.
+[ 6933.023422] RSP: 0018:ffffb2b585a0fc18 EFLAGS: 00010246
+[ 6933.023423] RAX: 0000000000000009 RBX: 0000000000000000 RCX: 0000000000000000
+[ 6933.023424] RDX: 0000000000000000 RSI: ffff8a1239e20580 RDI: ffff8a1239e20580
+[ 6933.023425] RBP: ffffb2b585a0fc28 R08: 0000000000000003 R09: fffffffffff23b08
+[ 6933.023426] R10: 000000000000000d R11: 0000000000000001 R12: ffffffffc098501a
+[ 6933.023427] R13: ffff8a1124b1fa80 R14: 0000000000000000 R15: ffffffffc0987000
+[ 6933.023428] FS:  00007fec4f1fc000(0000) GS:ffff8a1239e00000(0000) knlGS:0000000000000000
+[ 6933.023429] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[ 6933.023430] CR2: ffffffffc0984fdc CR3: 000000001195e002 CR4: 0000000000770ef0
+[ 6933.023438] PKRU: 55555554

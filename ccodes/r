@@ -1,0 +1,11 @@
+#!/usr/bin/bash
+
+CDIR=`pwd`
+cd ${CDIR}
+
+# Clear log and write "--" to out.log
+echo "--" > ${CDIR}/out.log
+echo "--[ CLEAN DONE]--" >> ${CDIR}/out.log
+make clean > /dev/null 2>&1
+echo "--[ ALL ]--" >> ${CDIR}/out.log
+make >> ${CDIR}/out.log 2>&1

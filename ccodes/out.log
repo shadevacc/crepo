@@ -1,0 +1,12 @@
+--
+--[ CLEAN DONE]--
+--[ ALL ]--
+make: Warning: File 'Makefile' has modification time 48107 s in the future
+mkdir -p build/./src/
+cc -I./src -MMD -MP -ggdb3  -c src/a0parr.c -o build/./src/a0parr.c.o
+mkdir -p build/./src/
+cc -I./src -MMD -MP -ggdb3  -c src/callfunc.c -o build/./src/callfunc.c.o
+mkdir -p build/./src/
+cc -I./src -MMD -MP -ggdb3  -c src/main.c -o build/./src/main.c.o
+g++ ./build/./src/a0parr.c.o ./build/./src/callfunc.c.o ./build/./src/main.c.o -o build/p 
+make: warning:  Clock skew detected.  Your build may be incomplete.

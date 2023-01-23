@@ -1,0 +1,22 @@
+make: Warning: File 'Makefile' has modification time 48569 s in the future
+make -C /lib/modules/5.15.0-58-generic/build M=/mnt/vmshare/kcodes/06_dummy_cdev_dev clean
+make[1]: Entering directory '/usr/src/linux-headers-5.15.0-58-generic'
+make[2]: Warning: File '/mnt/vmshare/kcodes/06_dummy_cdev_dev/Makefile' has modification time 48569 s in the future
+make[2]: warning:  Clock skew detected.  Your build may be incomplete.
+make[1]: Leaving directory '/usr/src/linux-headers-5.15.0-58-generic'
+make -C /lib/modules/5.15.0-58-generic/build M=/mnt/vmshare/kcodes/06_dummy_cdev_dev modules
+make[1]: Entering directory '/usr/src/linux-headers-5.15.0-58-generic'
+make[2]: Warning: File '/mnt/vmshare/kcodes/06_dummy_cdev_dev/Makefile' has modification time 48568 s in the future
+  CC [M]  /mnt/vmshare/kcodes/06_dummy_cdev_dev/dummycdev_dev.o
+make[2]: warning:  Clock skew detected.  Your build may be incomplete.
+make[2]: Warning: File '/mnt/vmshare/kcodes/06_dummy_cdev_dev/Makefile' has modification time 48568 s in the future
+  MODPOST /mnt/vmshare/kcodes/06_dummy_cdev_dev/Module.symvers
+make[3]: Warning: File '/mnt/vmshare/kcodes/06_dummy_cdev_dev/dummycdev_dev.o' has modification time 48593 s in the future
+  CC [M]  /mnt/vmshare/kcodes/06_dummy_cdev_dev/dummycdev_dev.mod.o
+  LD [M]  /mnt/vmshare/kcodes/06_dummy_cdev_dev/dummycdev_dev.ko
+  BTF [M] /mnt/vmshare/kcodes/06_dummy_cdev_dev/dummycdev_dev.ko
+Skipping BTF generation for /mnt/vmshare/kcodes/06_dummy_cdev_dev/dummycdev_dev.ko due to unavailability of vmlinux
+make[3]: warning:  Clock skew detected.  Your build may be incomplete.
+make[2]: warning:  Clock skew detected.  Your build may be incomplete.
+make[1]: Leaving directory '/usr/src/linux-headers-5.15.0-58-generic'
+make: warning:  Clock skew detected.  Your build may be incomplete.
