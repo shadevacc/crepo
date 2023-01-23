@@ -7,8 +7,8 @@
 #include <linux/err.h>
 
 #define EXIT_SUCCESS 0
-#define EXIT_FAILURE -1
 #define FIRST_MINOR 0
+#define EXIT_FAILURE -1
 #define REQ_DEV_CNT 1
 #define DEV "sha"
 #define CLS_NAME_DEV "cls_sha"

@@ -1,1 +1,0 @@
-cmd_/mnt/vmshare/kcodes/06_02_oops/oops.ko := ld -r -m elf_x86_64 -z noexecstack --build-id=sha1  -T scripts/module.lds -o /mnt/vmshare/kcodes/06_02_oops/oops.ko /mnt/vmshare/kcodes/06_02_oops/oops.o /mnt/vmshare/kcodes/06_02_oops/oops.mod.o;  true
