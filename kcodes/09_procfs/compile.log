@@ -1,0 +1,22 @@
+make: Warning: File 'Makefile' has modification time 46345 s in the future
+make -C /lib/modules/5.15.0-58-generic/build M=/mnt/vmshare/crepo/kcodes/09_procfs clean
+make[1]: Entering directory '/usr/src/linux-headers-5.15.0-58-generic'
+make[2]: Warning: File '/mnt/vmshare/crepo/kcodes/09_procfs/Makefile' has modification time 46344 s in the future
+make[2]: warning:  Clock skew detected.  Your build may be incomplete.
+make[1]: Leaving directory '/usr/src/linux-headers-5.15.0-58-generic'
+make -C /lib/modules/5.15.0-58-generic/build M=/mnt/vmshare/crepo/kcodes/09_procfs modules
+make[1]: Entering directory '/usr/src/linux-headers-5.15.0-58-generic'
+make[2]: Warning: File '/mnt/vmshare/crepo/kcodes/09_procfs/Makefile' has modification time 46344 s in the future
+  CC [M]  /mnt/vmshare/crepo/kcodes/09_procfs/procfs.o
+make[2]: warning:  Clock skew detected.  Your build may be incomplete.
+make[2]: Warning: File '/mnt/vmshare/crepo/kcodes/09_procfs/Makefile' has modification time 46343 s in the future
+  MODPOST /mnt/vmshare/crepo/kcodes/09_procfs/Module.symvers
+make[3]: Warning: File '/mnt/vmshare/crepo/kcodes/09_procfs/procfs.o' has modification time 48587 s in the future
+  CC [M]  /mnt/vmshare/crepo/kcodes/09_procfs/procfs.mod.o
+  LD [M]  /mnt/vmshare/crepo/kcodes/09_procfs/procfs.ko
+  BTF [M] /mnt/vmshare/crepo/kcodes/09_procfs/procfs.ko
+Skipping BTF generation for /mnt/vmshare/crepo/kcodes/09_procfs/procfs.ko due to unavailability of vmlinux
+make[3]: warning:  Clock skew detected.  Your build may be incomplete.
+make[2]: warning:  Clock skew detected.  Your build may be incomplete.
+make[1]: Leaving directory '/usr/src/linux-headers-5.15.0-58-generic'
+make: warning:  Clock skew detected.  Your build may be incomplete.
