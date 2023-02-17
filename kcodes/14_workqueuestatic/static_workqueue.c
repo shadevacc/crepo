@@ -14,6 +14,7 @@
 #include <asm/io.h>
 #include <linux/delay.h>
 #include <asm/hw_irq.h>
+#include <linux/workqueue.h>
 
 #define EXIT_SUCCESS        0
 #define EXIT_FAILURE        -1
@@ -43,6 +44,9 @@ static ssize_t m_show(struct kobject *kobj, struct kobj_attribute *attr,
                       char __user *buf);
 static ssize_t m_store(struct kobject *kobj, struct kobj_attribute *attr,
                        const char __user *buf, size_t count);
+static void workqueue_fn(struct work_struct *work);
+
+DECLARE_WORK(workqueue, workqueue_fn);
 
 static struct kobj_attribute m_kobj_attr = __ATTR(m_val, 0660, m_show, m_store);
 
@@ -55,10 +59,15 @@ static struct file_operations m_fops =
     .release = m_release,
 };
 
+static void workqueue_fn(struct work_struct *work) {
+    pr_info("%s +%d: %s()\n", __FILE__, __LINE__, __func__);
+}
+
 static irqreturn_t m_irq_handler(int irq, void *dev_id)
 {
     pr_info("%s +%d: %s() Interrupt occurred successfully\n",
             __FILE__, __LINE__, __func__);
+    schedule_work(&workqueue);
     return IRQ_HANDLED;
 }
 
@@ -76,11 +85,10 @@ static int m_release(struct inode *inode, struct file *file)
 
 static ssize_t m_read(struct file *file, char __user *buf, size_t len, loff_t *off)
 {
-    pr_info("%s +%d: %s()\n", __FILE__, __LINE__, __func__);
-    pr_info("Issuing interrupt\n");
-
     struct irq_desc *desc;
 
+    pr_info("%s +%d: %s()\n", __FILE__, __LINE__, __func__);
+    pr_info("Issuing interrupt\n");
     desc = irq_to_desc(11);
     if (!desc) 
     {

@@ -1,4 +1,4 @@
-obj-m += irqh.o
+obj-m += static_workqueue.o
 KDIR=/lib/modules/$(shell uname -r)/build
 
 all: clean modules
