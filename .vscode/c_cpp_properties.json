@@ -6,9 +6,10 @@
                 "${workspaceFolder}",
                 "/usr/include",
                 "/usr/local/include",
-                "/usr/src/linux-headers-5.15.0-57/include",
+                "/usr/src/include",
+                "/usr/src/linux-5.10.167/include",
                 "/usr/lib/gcc/x86_64-linux-gnu/11/include",
-                "/usr/src/linux-headers-5.15.0-57/arch/x86/include"
+                "/usr/src/linux-5.10.167/arch/x86/include"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",
