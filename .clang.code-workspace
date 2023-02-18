@@ -8,6 +8,9 @@
 		"files.associations": {
 			"cdev.h": "c",
 			"slab.h": "c"
-		}
+		},
+		"terminal.integrated.fontFamily": "FantasqueSansMono Nerd Font Mono",
+		"workbench.colorTheme": "Community Material Theme Palenight High Contrast",
+		"workbench.preferredDarkColorTheme": "Dracula"
 	}
 }
