@@ -6,63 +6,46 @@
 #include <linux/device.h>
 #include <linux/fs.h>
 #include <linux/err.h>
-#include <linux/delay.h>
 #include <linux/slab.h>
 #include <linux/uaccess.h>
 #include <linux/sysfs.h>
 #include <linux/kobject.h>
-#include <linux/kthread.h>
-#include <linux/sched.h>
 #include <linux/interrupt.h>
 #include <asm/io.h>
+#include <linux/delay.h>
 #include <asm/hw_irq.h>
-#include <linux/irq.h>
-#include <linux/workqueue.h>
-#include <linux/list.h>
 
-#define EXIT_FAILURE        -1
 #define EXIT_SUCCESS        0
+#define EXIT_FAILURE        -1
 #define MINOR_ZERO          0
 #define REQ_ONE_DEV         1
 #define IRQ_NO_ELEVEN       11
 #define SHA_DEV             "sha_dev"
 #define SHA_DEV_2           "sha_dev_2"
 #define SHA_CLASS           "sha_class"
-// #define KOBJ_DIR            "kobj_dir"
-#define MY_KERNEL_THREAD    "m_kernel_thread"
+#define KOBJ_DIR            "kobj_dir"
 
 static dev_t dev_num = 0;
-static volatile int m_val = 0;
+static volatile int m_val;
 static struct cdev m_cdev;
 static struct class *m_class;
-static struct task_struct *m_thread;
-// static struct kobject *m_kobject;
-// static struct workqueue_struct *own_wq;
+static struct kobject *m_kobject;
+static struct tasklet_struct *m_tasklet;
 
+
+static void m_tasklet_handler(unsigned long data);
 static int m_open(struct inode *inode, struct file *file);
 static int m_release(struct inode *inode, struct file *file);
 static ssize_t m_read(struct file *file, char __user *buf, size_t len,
                       loff_t *off);
 static ssize_t m_write(struct file *file, const char __user *buf, size_t len,
                        loff_t *off);
-static int m_thread_fn(void *data);
-#if 0
 static ssize_t m_show(struct kobject *kobj, struct kobj_attribute *attr,
                       char __user *buf);
 static ssize_t m_store(struct kobject *kobj, struct kobj_attribute *attr,
                        const char __user *buf, size_t count);
-static void workqueue_fn(struct work_struct *work);
 
-static DECLARE_WORK(work, workqueue_fn);
-
-struct my_list {
-    struct list_head mlist;
-    int data;
-};
-
-LIST_HEAD(mlist_head);
-#endif
-// static struct kobj_attribute m_kobj_attr = __ATTR(m_val, 0660, m_show, m_store);
+static struct kobj_attribute m_kobj_attr = __ATTR(m_val, 0660, m_show, m_store);
 
 static struct file_operations m_fops =
 {
@@ -72,36 +55,20 @@ static struct file_operations m_fops =
     .write = m_write,
     .release = m_release,
 };
-#if 0
-static void workqueue_fn(struct work_struct *work) {
 
-    static struct my_list *list_element = NULL;
-
-    list_element = kmalloc(sizeof(struct my_list), GFP_KERNEL);
-    list_element->data = m_val;
-    INIT_LIST_HEAD(&list_element->mlist);
-    list_add_tail(&list_element->mlist, &mlist_head);
-
-    pr_info("%s +%d: %s()\n", __FILE__, __LINE__, __func__);
+static void m_tasklet_handler(unsigned long data) {
+    pr_info("%s +%d: %s(unsigned long %ld)\n", __FILE__, __LINE__,
+                                                 __func__, data);
 }
+
+
 static irqreturn_t m_irq_handler(int irq, void *dev_id)
 {
     pr_info("%s +%d: %s() Interrupt occurred successfully\n",
             __FILE__, __LINE__, __func__);
-    // queue_work(own_wq, &work);
+    tasklet_schedule(m_tasklet);
     return IRQ_HANDLED;
 }
-#endif
-
-static int m_thread_fn(void *data) {
-    int i = 0;
-    while (!kthread_should_stop()) {
-        pr_info("%s +%d: %s executing(): %d\n", __FILE__, __LINE__, __func__, i++);
-        msleep(1000);
-    }
-    return EXIT_SUCCESS;
-}
-
 
 static int m_open(struct inode *inode, struct file *file)
 {
@@ -117,42 +84,29 @@ static int m_release(struct inode *inode, struct file *file)
 
 static ssize_t m_read(struct file *file, char __user *buf, size_t len, loff_t *off)
 {
-    // struct my_list *temp_list;
-    // static int count = 0;
-
     pr_info("%s +%d: %s()\n", __FILE__, __LINE__, __func__);
-#if 0
-    list_for_each_entry(temp_list, &mlist_head, mlist) {
-        pr_info("Node: %d, data: %d\n", count++, temp_list->data);
+    pr_info("Issuing interrupt\n");
+
+    struct irq_desc *desc;
+
+    desc = irq_to_desc(11);
+    if (!desc) 
+    {
+        return -EINVAL;
     }
-    pr_info("Total nodes: %d\n", count);
-#endif
+    __this_cpu_write(vector_irq[59], desc);
+    //0x20 + 0x10 + 11 = 0x3B = 59
+    asm("int $0x3B");
     return EXIT_SUCCESS;
 }
 
 static ssize_t m_write(struct file *file, const char __user *buf, size_t len, loff_t *off)
 {
-    // struct irq_desc *desc;
-
     pr_info("%s +%d: %s()\n", __FILE__, __LINE__, __func__);
-
-#if 0
-    pr_info("Issuing interrupt\n");
-    desc = irq_to_desc(11);
-    if (!desc) {
-        return -EINVAL;
-    }
-    __this_cpu_write(vector_irq[59], desc);
-    
-    if (copy_from_user(&m_val, buf, len)) {
-        pr_err("%s: copy_from_user failed\n", __func__);
-    }
-    //0x20 + 0x10 + 11 = 0x3B = 59
-    asm("int $0x3B");
-#endif
+    // return EXIT_SUCCESS;
     return len;
 }
-#if 0
+
 static ssize_t m_show(struct kobject *kobj, struct kobj_attribute *attr,
                       char __user *buf)
 {
@@ -167,7 +121,7 @@ static ssize_t m_store(struct kobject *kobj, struct kobj_attribute *attr,
     sscanf(buf, "%d", &m_val);
     return count;
 }
-#endif
+
 
 static int __init m_init(void);
 static void __exit m_exit(void);
@@ -205,25 +159,6 @@ static int __init m_init(void)
     }
     pr_info("device_create succeeded\n");
 
-    m_thread = kthread_create(m_thread_fn, NULL, MY_KERNEL_THREAD);
-    if (m_thread) {
-        wake_up_process(m_thread);
-        pr_info("thread_create succeeded\n");
-    } else {
-        pr_info("thread_create failed\n");
-        goto r_kthread_create;
-    }
-
-#if 0
-    m_thread = kthread_run(m_thread_fn, NULL, MY_KERNEL_THREAD);
-    if (m_thread) {
-        pr_info("thread_create succeeded\n");
-    } else {
-        pr_info("thread_create failed\n");
-    }
-#endif
-
-#if 0
     m_kobject = kobject_create_and_add(KOBJ_DIR, kernel_kobj);
     if ((sysfs_create_file(m_kobject, &m_kobj_attr.attr)) < 0) {
         pr_err("sysfs_create failed\n");
@@ -237,19 +172,23 @@ static int __init m_init(void)
     }
     pr_info("irq request successfully registered\n");
 
-    own_wq = create_workqueue("own_workqueue");
-    pr_info("own workqueue created\n");
-#endif
+    m_tasklet = kmalloc(sizeof(struct tasklet_struct), GFP_KERNEL);
+    if (m_tasklet == NULL) {
+        pr_err("m_tasklet alloc failed\n");
+        goto r_tasklet;
+    }
+    pr_info("tasklet alloc successfully registered\n");
+
+    tasklet_init(m_tasklet, m_tasklet_handler, 0);
+    pr_info("tasklet init is successfull\n");
 
     return EXIT_SUCCESS;
-#if 0
+r_tasklet:
+    free_irq(IRQ_NO_ELEVEN, (void *)(m_irq_handler));
 r_irq:
     sysfs_remove_file(m_kobject, &m_kobj_attr.attr);
 r_sysfs:
     kobject_put(m_kobject);
-#endif
-r_kthread_create:
-    device_destroy(m_class, dev_num);
 r_device_create:
     class_destroy(m_class);
 r_class:
@@ -261,30 +200,25 @@ r_cdev:
 
 static void __exit m_exit(void)
 {
-    // struct my_list *cursor, *temp;
-
     pr_info("%s +%d: %s()\n", __FILE__, __LINE__, __func__);
-#if 0
-    list_for_each_entry_safe(cursor, temp, &mlist_head, mlist) {
-        list_del(&cursor->mlist);
-        kfree(cursor);
+
+    tasklet_kill(m_tasklet);
+    if (m_tasklet != NULL) {
+        kfree(m_tasklet);
     }
-    destroy_workqueue(own_wq);
+
     free_irq(IRQ_NO_ELEVEN, (void *)(m_irq_handler));
     sysfs_remove_file(m_kobject, &m_kobj_attr.attr);
     kobject_put(m_kobject);
-#endif
-    kthread_stop(m_thread);
     device_destroy(m_class, dev_num);
     class_destroy(m_class);
     cdev_del(&m_cdev);
     unregister_chrdev_region(dev_num, REQ_ONE_DEV);
 
-            // freed irq_eleven\n\
-            // removed sysfs file\n\
-            // removed sysfs directory\n\
-
     pr_info("Successfully\n\
+            freed irq_eleven\n\
+            removed sysfs file\n\
+            removed sysfs directory\n\
             destroyed device 2\n\
             destroyed class\n\
             deleted cdev\n\
@@ -297,4 +231,4 @@ module_exit(m_exit);
 MODULE_AUTHOR("sha");
 MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("Interrupt device driver");
-MODULE_VERSION("1:0.18");
+MODULE_VERSION("1:0.20");

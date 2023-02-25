@@ -7,6 +7,9 @@
     "workbench.iconTheme": "Monokai Pro Icons",
     "editor.fontFamily": "FantasqueSansMono Nerd Font Mono",
     "editor.fontSize": 18,
+    "editor.lineHeight": 22,
+    "editor.cursorStyle": "line",
+    "editor.cursorWidth": 2,
     "material-icon-theme.folders.theme": "specific",
     "terminal.integrated.fontSize": 17,
     "workbench.tree.indent": 32,
@@ -17,8 +20,6 @@
     "editor.rulers": [
         70, 80, 120
     ],
-    "editor.cursorStyle": "line",
-    "editor.cursorWidth": 2,
-    "editor.lineHeight": 20,
+
     "workbench.editor.enablePreview": false,
 }

@@ -1,1 +1,0 @@
-cmd_/mnt/vmshare/crepo/kcodes/19_kthread/Module.symvers := sed 's/ko$$/o/' /mnt/vmshare/crepo/kcodes/19_kthread/modules.order | scripts/mod/modpost -m -a   -o /mnt/vmshare/crepo/kcodes/19_kthread/Module.symvers -e -i Module.symvers   -T -

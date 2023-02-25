@@ -8,10 +8,19 @@
 		"files.associations": {
 			"cdev.h": "c",
 			"slab.h": "c",
-			"interrupt.h": "c"
+			"interrupt.h": "c",
+			"workqueue.h": "c",
+			"hrtimer.h": "c",
+			"irqflags.h": "c",
+			"hardirq.h": "c",
+			"kernel.h": "c",
+			"bitops.h": "c",
+			"irqreturn.h": "c",
+			"irq.h": "c"
 		},
 		"terminal.integrated.fontFamily": "FantasqueSansMono Nerd Font Mono",
 		"workbench.colorTheme": "Community Material Theme Palenight High Contrast",
-		"workbench.preferredDarkColorTheme": "Dracula"
+		"workbench.preferredDarkColorTheme": "Dracula",
+		"editor.fontSize": 18
 	}
 }

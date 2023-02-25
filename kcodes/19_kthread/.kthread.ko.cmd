@@ -1,1 +1,0 @@
-cmd_/mnt/vmshare/crepo/kcodes/19_kthread/kthread.ko := ld -r -m elf_x86_64 -z noexecstack --build-id=sha1  -T scripts/module.lds -o /mnt/vmshare/crepo/kcodes/19_kthread/kthread.ko /mnt/vmshare/crepo/kcodes/19_kthread/kthread.o /mnt/vmshare/crepo/kcodes/19_kthread/kthread.mod.o;  true
