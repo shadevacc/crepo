@@ -22,7 +22,10 @@
 			"signal.h": "c",
 			"siginfo.h": "c",
 			"unistd.h": "c",
-			"sigaction.h": "c"
+			"sigaction.h": "c",
+			"timer.h": "c",
+			"jiffies.h": "c",
+			"time.h": "c"
 		},
 		"terminal.integrated.fontFamily": "FantasqueSansMono Nerd Font Mono",
 		"workbench.colorTheme": "Community Material Theme Palenight High Contrast",
