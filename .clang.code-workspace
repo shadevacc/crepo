@@ -25,7 +25,8 @@
 			"sigaction.h": "c",
 			"timer.h": "c",
 			"jiffies.h": "c",
-			"time.h": "c"
+			"time.h": "c",
+			"atomic.h": "c"
 		},
 		"terminal.integrated.fontFamily": "FantasqueSansMono Nerd Font Mono",
 		"workbench.colorTheme": "Community Material Theme Palenight High Contrast",
