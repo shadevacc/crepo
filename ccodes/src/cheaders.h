@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 void callfunc();
 void a0_parr();
-void ds_stack();
+int ds_stack();
+int a2_callgrind();

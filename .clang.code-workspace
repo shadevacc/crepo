@@ -26,13 +26,19 @@
 			"timer.h": "c",
 			"jiffies.h": "c",
 			"time.h": "c",
-			"atomic.h": "c"
+			"atomic.h": "c",
+			"usb.h": "c",
+			"ch9.h": "c",
+			"kobject.h": "c",
+			"sysfs.h": "c",
+			"uaccess.h": "c",
+			"gpio.h": "c"
 		},
 		"terminal.integrated.fontFamily": "FantasqueSansMono Nerd Font Mono",
 		"workbench.colorTheme": "Community Material Theme Palenight High Contrast",
 		"workbench.preferredDarkColorTheme": "Dracula",
 		"editor.fontSize": 17,
-		"editor.fontFamily": "CodeNewRoman Nerd Font Mono",
+		"editor.fontFamily": "FantasqueSansMono Nerd Font Mono",
 		"editor.cursorStyle": "line"
 	}
 }

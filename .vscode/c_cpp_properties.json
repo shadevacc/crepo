@@ -8,6 +8,7 @@
                 "/usr/local/include",
                 "/usr/src/include",
                 "/usr/src/linux-5.10.167/include",
+                "/usr/src/linux-5.10.167/include/uapi",
                 "/usr/lib/gcc/x86_64-linux-gnu/11/include",
                 "/usr/src/linux-5.10.167/arch/x86/include"
             ],

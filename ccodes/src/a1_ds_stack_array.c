@@ -56,7 +56,7 @@ int peek(struct Stack* stack) {
 void displayStack(struct Stack* stack) {
     if (isEmpty(stack)) {
         printf("Stack is empty\n");
-        return -1;
+        // return -1;
     }
     for (int i = 0; i < stack->top; i++) {
         printf("stack->array[%d] = %d\n", i, stack->array[i]);
