@@ -32,13 +32,15 @@
 			"kobject.h": "c",
 			"sysfs.h": "c",
 			"uaccess.h": "c",
-			"gpio.h": "c"
+			"gpio.h": "c",
+			"driver.h": "c"
 		},
 		"terminal.integrated.fontFamily": "FantasqueSansMono Nerd Font Mono",
 		"workbench.colorTheme": "Community Material Theme Palenight High Contrast",
 		"workbench.preferredDarkColorTheme": "Dracula",
 		"editor.fontSize": 17,
 		"editor.fontFamily": "FantasqueSansMono Nerd Font Mono",
-		"editor.cursorStyle": "line"
+		"editor.cursorStyle": "line",
+		"esbonio.sphinx.confDir": ""
 	}
 }
