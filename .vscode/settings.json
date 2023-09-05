@@ -5,9 +5,10 @@
     "remote.SSH.connectTimeout": 35,
     "tabnine.experimentalAutoImports": true,
     "workbench.iconTheme": "Monokai Pro Icons",
-    "editor.fontFamily": "Lekton Nerd Font Mono",
-    "editor.fontSize": 18,
-    "editor.lineHeight": 22,
+    // Uncomment below lines in case you want to use Lekton font
+    // "editor.fontFamily": "Lekton Nerd Font Mono",
+    // "editor.fontSize": 18,
+    // "editor.lineHeight": 22,
     "editor.cursorStyle": "line",
     "editor.cursorWidth": 2,
     "material-icon-theme.folders.theme": "specific",
