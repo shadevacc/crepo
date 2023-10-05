@@ -1,7 +1,8 @@
 
 #include "main.h"
 
-int main() {
+int main()
+{
     printf("--[ START ]--\n");
     callfunc();
     printf("--[ END ]--\n");
