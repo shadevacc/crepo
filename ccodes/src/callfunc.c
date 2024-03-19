@@ -12,4 +12,5 @@ void callfunc()
 #endif
     dsandalgs_call();
     cpointers_call();
+    leetcode_call();
 }
