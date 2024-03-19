@@ -103,9 +103,14 @@ static int m_thread_fn(void *data) {
     while(1) {
         pr_info("waiting for event completion..\n");
         wait_for_completion(&m_data_read_done);
+	mdelay(2000);
         if (m_completion_var == 2) {
             pr_info("Event came from exit function\n");
-            return EXIT_SUCCESS;
+	    if (kthread_should_stop()) {
+                pr_info("kthread_should_stop is executed\n");
+	        return EXIT_SUCCESS;
+            }
+            //return EXIT_SUCCESS;
         } else if (m_completion_var == 1) {
             pr_info("Event came from read function\n");
         } else {
@@ -289,6 +294,8 @@ static void __exit m_exit(void)
     m_completion_var = 2;
     if (!completion_done(&m_data_read_done))
         complete(&m_data_read_done);
+    pr_info("%s +%d: %s()\n", __FILE__, __LINE__, __func__);
+    mdelay(1000);
 #if 0
     list_for_each_entry_safe(cursor, temp, &mlist_head, mlist) {
         list_del(&cursor->mlist);

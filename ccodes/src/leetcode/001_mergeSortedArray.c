@@ -17,7 +17,7 @@ void l0_merge(int* nums1, int nums1Size, int m,
         case 'A':
         case 'E':
         case 'I':
-        case 'I':
+        case 'O':
         case 'U':
         {
             printf("character %c is VOWEL\n", ch);

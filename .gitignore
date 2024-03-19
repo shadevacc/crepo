@@ -1,2 +1,5 @@
 kcodes/docsldd/_build
 _build
+.DS_Store
+ccodes/.DS_Store
+kcodes/.DS_Store
